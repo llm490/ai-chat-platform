@@ -1,38 +1,42 @@
-name: gh-pages
+name: Deploy
 
 on:
-  # set triggers here, like on push or on release
-  workflow_dispatch:
   push:
-    branches: [ main ]
-  pull_request:
+    branches:
+      - main  # 如果你本地是 master，请改为 master
+
+# 必须显式声明权限，否则 Action 无法推送代码到 gh-pages 分支
+permissions:
+  contents: write
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.12.x
+      - name: Checkout
+        uses: actions/checkout@v4 # 升级到 v4 消除警告
 
-      - uses: pnpm/action-setup@v3.0.0
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4 # 升级到 v4
         with:
-          version: 10
+          version: 9
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4 # 升级到 v4
+        with:
+          node-version: 24 # 直接使用 Node 24 消除过时警告
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build
-        run: pnpm build:gh-pages
+        run: pnpm build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          publish_dir: ./dist
-          # Leave user_name and user_email unset to commit under your own username
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          # Optional. I'm using this for testing.
-          allow_empty_commit: false
+          folder: dist
+          branch: gh-pages
+          # 关键：自动引用 GitHub 系统生成的令牌进行身份验证
+          token: ${{ secrets.GITHUB_TOKEN }}
