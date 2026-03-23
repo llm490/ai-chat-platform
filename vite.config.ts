@@ -16,11 +16,13 @@ import { loadEnv } from 'vite'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
+  const baseContent = mode === 'production' ? '/ai-chat-platform/' : '/'
 
   return {
-    base: env.VITE_ROUTER_MODE === 'hash'
-      ? ''
-      : '/',
+    // base: env.VITE_ROUTER_MODE === 'hash'
+    //   ? ''
+    //   : '/',
+    base: baseContent,
     server: {
       port: 2048,
       proxy: {
