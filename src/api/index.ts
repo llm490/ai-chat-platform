@@ -1,14 +1,4 @@
-// import request from '@/utils/request'
 
-// /**
-//  * Get 请求示例
-//  */
-// export function getXxxxPrompt (params) {
-//   return request.get(`/xxxxxx/test/prompt`, params)
-// }
-/**
- * AI 对话请求 (支持流式传输 SSE)
- */
 export async function chatFetch(params: any) {
   const baseURL = import.meta.env.VITE_GLOB_API_URL.replace(/\/$/, '') // 去掉末尾斜杠
   const apiKey = import.meta.env.VITE_SILICONFLOW_KEY

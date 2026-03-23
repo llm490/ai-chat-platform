@@ -8,7 +8,7 @@ import { UAParser } from 'ua-parser-js'
 
 const route = useRoute()
 const router = useRouter()
-const businessStore = useBusinessStore()
+const businessStore = useBusinessStore()//获取全局业务状态（当前选中的模型名、发送请求的方法）
 
 
 const modelListSelections = computed(() => {
@@ -34,7 +34,7 @@ setTimeout(() => {
   loading.value = false
 }, 700)
 
-
+//关键状态：AI是否正在生成回答
 const stylizingLoading = ref(false)
 
 
