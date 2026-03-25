@@ -9,7 +9,7 @@ withDefaults(
   }
 )
 
-const link = ref('https://github.com/pdsuwwz')
+const link = ref('https://github.com/llm490/ai-chat-platform')
 
 </script>
 
@@ -27,7 +27,7 @@ const link = ref('https://github.com/pdsuwwz')
         class="text"
       >
         <NavigationNavOctocat />
-        MIT Licensed | Copyright © 2020-PRESENT <a
+        MIT Licensed | Copyright © 2026-PRESENT <a
           target="_blank"
           :href="link"
           class="github-link c-#555 dark:c-#fff b-b b-b-solid b-b-#3c3c43:12 dark:b-b-#666:12"

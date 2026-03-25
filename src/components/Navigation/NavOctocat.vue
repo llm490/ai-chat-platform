@@ -1,6 +1,14 @@
+<!--
+ * @Author: llm llm@itcast.cn
+ * @Date: 2026-03-23 10:17:00
+ * @LastEditors: llm llm@itcast.cn
+ * @LastEditTime: 2026-03-24 17:23:49
+ * @FilePath: \chatgpt-vue3-light-mvp-main\src\components\Navigation\NavOctocat.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <script lang="ts" setup>
 
-const link = ref('https://github.com/pdsuwwz/chatgpt-vue3-light-mvp')
+const link = ref('https://github.com/llm490/ai-chat-platform')
 
 </script>
 

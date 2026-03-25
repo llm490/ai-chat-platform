@@ -4,7 +4,7 @@
 >
 >- 如果需要调用真实的 GPT 接口，请拉取本仓库，在本地开发环境中配置相应的 `API` 密钥和`接口地址`。
 
-## <a target="_blank" href="https://github.com/pdsuwwz/chatgpt-vue3-light-mvp">关于本仓库</a>
+## <a target="_blank" href="https://github.com/llm490/ai-chat-platform">关于本仓库</a>
 
 ![GitHub Pages](https://img.shields.io/badge/gh--pages-passing-brightgreen)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
@@ -12,7 +12,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 
-<a target="_blank" href="https://github.com/pdsuwwz/chatgpt-vue3-light-mvp">本仓库</a>是一个可二次开发的 ChatBot 对话 Web 端 MVP 原型模板，基于 `Vue3`、`TypeScript`、`Naive UI`、`UnoCSS` 等主流技术构建。项目特点如下：
+<a target="_blank" href="https://github.com/llm490/ai-chat-platform">本仓库</a>是一个可二次开发的 ChatBot 对话 Web 端 MVP 原型模板，基于 `Vue3`、`TypeScript`、`Naive UI`、`UnoCSS` 等主流技术构建。项目特点如下：
 
 - **大语言模型 API 集成**: 简单集成大语言模型 API，支持单轮 AI 对话模式。每次提问都会独立响应，无需上下文，提供简洁高效的对话体验。
 - **Markdown 预览**: 集成 Markdown 预览功能，使用户可以发送和接收格式化的 Markdown 内容，增强用户交流的灵活性和展示效果。
@@ -26,7 +26,7 @@
 **如何使用**:
 1. **克隆仓库**: 将本仓库克隆到本地。
     ```bash
-    git clone https://github.com/pdsuwwz/chatgpt-vue3-light-mvp.git
+    git clone https://github.com/llm490/ai-chat-platform.git
     ```
 2. **安装依赖**: 进入项目目录并安装依赖。
     ```bash
@@ -199,9 +199,9 @@ sequenceDiagram
 
 ## 🌹 说明
 
-> * 如果此开源对您有帮助，您可以点<a target="_blank" href="https://github.com/pdsuwwz/chatgpt-vue3-light-mvp">开源仓库</a>右上角 \`Star\` 支持一下 谢谢！ ^_^ ⭐️
+> * 如果此开源对您有帮助，您可以点<a target="_blank" href="https://github.com/llm490/ai-chat-platform">开源仓库</a>右上角 \`Star\` 支持一下 谢谢！ ^_^ ⭐️
 >
-> * 或者您可以 <a target="_blank" href="https://github.com/pdsuwwz">Follow</a> 一下, 我会不断开源更多有趣和实用的项目
+> * 或者您可以 <a target="_blank" href="https://github.com/llm490">Follow</a> 一下, 我会不断开源更多有趣和实用的项目
 >
 > * 开发环境 MacOS Ventura, VSCode, Chrome
 >

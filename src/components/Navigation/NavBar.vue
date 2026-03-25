@@ -15,7 +15,7 @@ withDefaults(
 
 
 const handleToRepo = () => {
-  const link = ref('https://github.com/pdsuwwz/chatgpt-vue3-light-mvp')
+  const link = ref('https://github.com/llm490/ai-chat-platform')
   window.open(link.value, '_blank')
 }
 
@@ -34,19 +34,16 @@ const handleToRepo = () => {
         : 'b-b-transparent'
     ]"
   >
+    <slot name="left"></slot>
     <div
-      class="header-left"
+      flex="~ items-center justify-center"
+      class="text-20"
+      select-none
+      cursor-pointer
+      @click="handleToRepo()"
     >
-      <div
-        flex="~ items-center justify-center"
-        class="text-20"
-        select-none
-        cursor-pointer
-        @click="handleToRepo()"
-      >
-        <div class="size-24 i-streamline-emojis:cloud-1"></div>
-        <div class="flex-1 pl-10 font-600 text-center">{{ systemTitle }}</div>
-      </div>
+      <div class="size-24 i-streamline-emojis:cloud-1"></div>
+      <div class="flex-1 pl-10 font-600 text-center">{{ systemTitle }}</div>
     </div>
     <div class="flex-1">
       <div

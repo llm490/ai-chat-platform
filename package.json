@@ -19,13 +19,13 @@
     "node": ">= 22.12.x",
     "pnpm": ">= 10.x"
   },
-  "homepage": "https://github.com/pdsuwwz/chatgpt-vue3-light-mvp",
+  "homepage": "https://github.com/llm490/ai-chat-platform",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pdsuwwz/chatgpt-vue3-light-mvp"
+    "url": "git+https://github.com/llm490/ai-chat-platform"
   },
   "bugs": {
-    "url": "https://github.com/pdsuwwz/chatgpt-vue3-light-mvp/issues"
+    "url": "https://github.com/llm490/ai-chat-platform/issues"
   },
   "dependencies": {
     "@nzoth/toolkit": "^0.0.4",
@@ -47,6 +47,7 @@
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.0",
     "@eslint/js": "^10.0.1",
+    "@iconify-json/arcticons": "^1.2.51",
     "@iconify/json": "^2.2.444",
     "@iconify/vue": "^5.0.0",
     "@stylistic/eslint-plugin": "^5.9.0",
