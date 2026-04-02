@@ -2,7 +2,7 @@
  * @Author: llm llm@itcast.cn
  * @Date: 2026-03-23 10:17:00
  * @LastEditors: llm llm@itcast.cn
- * @LastEditTime: 2026-03-25 10:28:08
+ * @LastEditTime: 2026-03-26 19:34:23
  * @FilePath: \chatgpt-vue3-light-mvp-main\src\store\business\index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -22,12 +22,14 @@ export interface BusinessState {
 }
 
 export const useBusinessStore = defineStore('business-store', {
+  //数据仓库
   state: (): BusinessState => {
     return {
-      systemModelName: defaultModelName,
+      systemModelName: defaultModelName, //使用的大模型
       historyList: JSON.parse(localStorage.getItem('chat_history') || '[]')
     }
   },
+  //动态计算
   getters: {
     currentModelItem (state) {
       return modelMappingList.find(v => v.modelName === state.systemModelName)
@@ -73,7 +75,7 @@ export const useBusinessStore = defineStore('business-store', {
         }
         this.currentModelItem.chatFetch(data.text)
           .then((res) => {
-            if (res.body) {
+            if (res.ok && res.body) {
               const reader = res.body
                 .pipeThrough(new TextDecoderStream())
                 .pipeThrough(TransformUtils.splitStream('\n'))
@@ -84,6 +86,7 @@ export const useBusinessStore = defineStore('business-store', {
                 reader
               })
             } else {
+              console.error('🔥 拦截到大模型报错！状态码:', res.status)
               resolve({
                 error: 1,
                 reader: null

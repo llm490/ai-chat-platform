@@ -1,3 +1,4 @@
+//  $slots.sidebar 是 Vue 内部用来判断“外部有没有往 sidebar 这个插槽里塞东西”的变量
 <script lang="ts" setup>
 </script>
 

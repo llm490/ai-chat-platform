@@ -86,13 +86,13 @@ const onCompletedReader = (fullText: string = '') => {
 
   const finalContent = fullText || refReaderMarkdownPreview.value?.getExposeContent?.() || domContent
 
-  console.log('最终抓取到的内容:', finalContent)
+  // console.log('最终抓取到的内容:', finalContent)
 
   if (finalContent && userQuestion.value) {
     businessStore.saveToHistory(userQuestion.value, finalContent)
-    console.log('✅ 保存成功！你可以刷新页面看看左侧了')
+    // console.log('✅ 保存成功！你可以刷新页面看看左侧了')
   } else {
-    console.error('❌ 保存依然失败，内容为空')
+    // console.error('❌ 保存依然失败，内容为空')
   }
 
   triggerModelTermination()
@@ -140,7 +140,7 @@ const keys = useMagicKeys()
 const enterCommand = keys['Meta+Enter']
 const enterCtrl = keys['Ctrl+Enter']
 
-const activeElement = useActiveElement()
+const activeElement = useActiveElement()//实时告诉当前鼠标光标停在网页哪个元素上
 const notUsingInput = computed(() => activeElement.value?.tagName !== 'TEXTAREA')
 
 const parser = new UAParser()

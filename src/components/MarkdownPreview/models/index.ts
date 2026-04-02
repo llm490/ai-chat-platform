@@ -5,8 +5,9 @@ import { sleep } from '@/utils/request'
  * 转义处理响应值为 data: 的 json 字符串
  * 如: 科大讯飞星火、Kimi Moonshot 等大模型的 response
  */
+//很多大模型（如 Kimi、星火）返回的数据长这样：data: {"choices":[{"delta":{"content":"你好"}}]} \n\n
 export const createParser = () => {
-  let keepAliveShown = false
+  let keepAliveShown = false//防止连接断开
 
   const resetKeepAliveParser = () => {
     keepAliveShown = false
@@ -40,12 +41,13 @@ export const createParser = () => {
 
     // 尝试直接解析 JSON 字符串
     try {
+      //去掉首尾的空格和换行符
       const trimmedContent = content.trim()
 
       if (trimmedContent === ': keep-alive') {
         // 如果还没有显示过 keep-alive 提示，则显示
         if (!keepAliveShown) {
-          keepAliveShown = true
+          keepAliveShown = true//已通知过前端
           return {
             isWaitQueuing: true
           }
@@ -75,9 +77,10 @@ export const createParser = () => {
     parseJsonLikeData
   }
 }
-
+//专门给推理模型准备的，e.g.Deep seekR1。会有一段思考过程
+//它会监听返回的数据，如果是思考内容，就自动给它套上 <think>...</think> 的标签；等思考结束，再拼接正式内容。这样在前端就能渲染出类似“折叠思考过程”的高级 UI
 export const createStreamThinkTransformer = () => {
-  let isThinking = false
+  let isThinking = false//AI是否在思考
 
   const resetThinkTransformer = () => {
     isThinking = false
@@ -100,6 +103,7 @@ export const createStreamThinkTransformer = () => {
       }
     }
 
+    //防御性编程：如果数据结构不对（没有 choices），直接返回空字符串，防止报错
     if (!stream || !stream.choices || stream.choices.length === 0) {
       return {
         content: ''
@@ -107,8 +111,8 @@ export const createStreamThinkTransformer = () => {
     }
 
     const delta = stream.choices[0].delta
-    const contentText = delta.content || ''
-    const reasoningText = delta.reasoning_content || ''
+    const contentText = delta.content || ''//正式回答的
+    const reasoningText = delta.reasoning_content || ''//思考过程中的文字
 
     let transformedContent = ''
 
@@ -152,6 +156,7 @@ const { resetThinkTransformer, transformStreamThinkData } = createStreamThinkTra
 /**
  * 处理大模型调用暂停、异常或结束后触发的操作
  */
+//点击停止生成按钮时，把前面状态清空，准备迎接新的对话
 export const triggerModelTermination = () => {
   resetKeepAliveParser()
   resetThinkTransformer()
@@ -174,6 +179,7 @@ export type CrossTransformFunction = (readValue: Uint8Array | string, textDecode
 
 export type TransformFunction = (readValue: Uint8Array | string, textDecoder: TextDecoder) => ContentResult
 
+//合同
 interface TypesModelLLM {
   // 模型昵称
   label: string
@@ -199,7 +205,7 @@ export const defaultMockModelName = 'standard'
 
 // export const defaultModelName = 'spark'
 export const defaultModelName = defaultMockModelName
-
+//各种大模型的配置
 export const modelMappingList: TypesModelLLM[] = [
   {
     label: '🧪 模拟数据模型',
@@ -231,7 +237,7 @@ export const modelMappingList: TypesModelLLM[] = [
           controller.close()
         }
       })
-      await sleep(500)
+      await sleep(500)//模拟网络延迟
 
       return new Promise((resolve) => {
         resolve({
@@ -481,14 +487,14 @@ export const modelMappingList: TypesModelLLM[] = [
     label: '⚡ Kimi Moonshot 月之暗面大模型',
     modelName: 'moonshot',
     transformStreamValue(readValue) {
-      const stream = parseJsonLikeData(readValue)
+      const stream = parseJsonLikeData(readValue)//解析JSON
       if (stream.done) {
         return {
           done: true
         }
       }
       return {
-        content: stream.choices[0].delta.content || ''
+        content: stream.choices[0].delta.content || ''//提取文字
       }
     },
     // Event Stream 调用大模型接口 Kimi Moonshot 月之暗面大模型 (Fetch 调用)
@@ -510,10 +516,12 @@ export const modelMappingList: TypesModelLLM[] = [
           'model': 'moonshot-v1-8k',
           stream: true,
           messages: [
+            //人设设定，告诉AI它是谁
             {
               role: 'system',
               content: '你是 Kimi，由 Moonshot AI 提供的人工智能助手，你更擅长中文和英文的对话。你会为用户提供安全，有帮助，准确的回答。同时，你会拒绝一切涉及恐怖主义，种族歧视，黄色暴力等问题的回答。Moonshot AI 为专有名词，不可翻译成其他语言。'
             },
+            //把刚才在输入框敲得问题发给他
             {
               role: 'user',
               content: text
